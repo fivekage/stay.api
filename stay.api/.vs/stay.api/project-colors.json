@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a0ce1b80-40ba-4d47-85a9-2792e2e059bf": {
+      "ProjectGuid": "a0ce1b80-40ba-4d47-85a9-2792e2e059bf",
+      "DisplayName": "stay.api",
+      "ColorIndex": 0
+    },
+    "89f68cb6-e234-4d32-bd26-ede8faf26894": {
+      "ProjectGuid": "89f68cb6-e234-4d32-bd26-ede8faf26894",
+      "DisplayName": "stay.domain",
+      "ColorIndex": 1
+    },
+    "aec36db1-8e0a-4cee-9446-1aec72f38512": {
+      "ProjectGuid": "aec36db1-8e0a-4cee-9446-1aec72f38512",
+      "DisplayName": "stay.infrastructure",
+      "ColorIndex": 2
+    },
+    "539f3cd6-7c03-4634-934e-0dfa45e876c1": {
+      "ProjectGuid": "539f3cd6-7c03-4634-934e-0dfa45e876c1",
+      "DisplayName": "stay.application",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}
