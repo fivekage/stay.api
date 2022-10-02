@@ -31,3 +31,6 @@ steps:
               cd ../../
            done
         fi
+logsBucket: "gs://mylogsbucket"
+options:
+  logging: CLOUD_LOGGING_ONLY
