@@ -52,7 +52,6 @@ jobs:
           image_name: ${{ secrets.GAR_IMAGE }}
           image_tag: $GITHUB_SHA
           dockerfile: ./stay.api/Dockerfile
-          context: ./stay.api/
 
       - name: "Deploy to App Engine"
         uses: "google-github-actions/deploy-appengine@v0"
