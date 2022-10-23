@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\stay.api\\stay.domain\\stay.domain.csproj": {}
+    "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\Stay\\stay.api\\stay.domain\\stay.domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\stay.api\\stay.domain\\stay.domain.csproj": {
+    "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\Stay\\stay.api\\stay.domain\\stay.domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\stay.api\\stay.domain\\stay.domain.csproj",
+        "projectUniqueName": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\Stay\\stay.api\\stay.domain\\stay.domain.csproj",
         "projectName": "stay.domain",
-        "projectPath": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\stay.api\\stay.domain\\stay.domain.csproj",
+        "projectPath": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\Stay\\stay.api\\stay.domain\\stay.domain.csproj",
         "packagesPath": "C:\\Users\\Samy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\stay.api\\stay.domain\\obj\\",
+        "outputPath": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\Stay\\stay.api\\stay.domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -57,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.109\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.110\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fuyqj4boL3BK0NSx6Pyvgljm/kA0pdxk4lUbovqIEbNfTrFF42KQKQXuiY4LMpUnWRdmZnMc+Zy2Xd4W8n1UIw==",
+  "dgSpecHash": "7A6kDYfPj/BTtWaHt/PMBB8I5/ehzNrMZn7215TeH+VqrPrIivPH6rCdyytMT8wnTx8tLOzRmyLJbA3LdKfL0A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\stay.api\\stay.domain\\stay.domain.csproj",
+  "projectFilePath": "C:\\Users\\Samy\\Desktop\\Ecole\\M2\\Projet thématique\\Stay\\stay.api\\stay.domain\\stay.domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
