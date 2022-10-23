@@ -35,11 +35,9 @@ jobs:
         run: |
           gcloud auth configure-docker ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
 
-      - name: Move to API directory
-        run: cd stay.api
-
       - name: Build and push
         id: build_and_push
+        working-directory: ./stay.api
         run: |
           docker build -t ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA .
           docker push ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA
