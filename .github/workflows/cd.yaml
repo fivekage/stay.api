@@ -24,6 +24,7 @@ jobs:
         shell: bash
 
     steps:
+      - uses: actions/checkout@v2
       # Login to Google Cloud
       - id: "auth"
         name: "Authenticate to Google Cloud"
