@@ -1,0 +1,42 @@
+name: Continous Deployement
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deployement:
+    name: "Deployement"
+    environment: production
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+      GCP_LOCATION: ${{ secrets.GCP_LOCATION }}
+      GAR_IMAGE: ${{ secrets.GAR_IMAGE }}
+      GAR_REPOSITORY: ${{ secrets.GAR_REPOSITORY }}
+
+    runs-on: ubuntu-latest
+    steps:
+      # Login to Google Cloud
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v0"
+        with:
+          credentials_json: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}"
+
+      - name: Configure docker
+        run: |
+          gcloud auth configure-docker $GCP_LOCATION-docker.pkg.dev
+
+      - name: Build and push
+        id: build_and_push
+        # à changer les valeurs ici
+        run: |
+          docker build -t $GCP_LOCATION-docker.pkg.dev/$GCP_PROJECT/£GAR_REPOSITORY/$GAR_IMAGE:$GITHUB_SHA .
+          docker push $GCP_LOCATION-docker.pkg.dev/$GCP_PROJECT/£GAR_REPOSITORY/$GAR_IMAGE:$GITHUB_SHA
+
+      - name: "Deploy to App Engine"
+        uses: "google-github-actions/deploy-appengine@v0"
+        with:
+          deliverables: "../../stay.api/app.yaml"
+          version: "v1"
