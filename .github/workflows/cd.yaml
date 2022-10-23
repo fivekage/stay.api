@@ -35,23 +35,11 @@ jobs:
         run: |
           gcloud auth configure-docker ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
 
-      #- name: Build and push
-      #  id: build_and_push
-      #  with:
-      #    context: ./${{ secrets.GCP_PROJECT }}/
-      #  # à changer les valeurs ici
-      #  run: |
-      #    docker build -t ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA .
-      #    docker push ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA
-
-      - uses: RafikFarhad/push-to-gcr-github-action@v5-beta
-        with:
-          # gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
-          registry: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
-          project_id: ${{ secrets.GCP_PROJECT }}
-          image_name: ${{ secrets.GAR_IMAGE }}
-          image_tag: $GITHUB_SHA
-          dockerfile: ./stay.api/Dockerfile
+      - name: Build and push
+        id: build_and_push
+        run: |
+          docker build -t ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA ./stay.api/
+          docker push ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA
 
       - name: "Deploy to App Engine"
         uses: "google-github-actions/deploy-appengine@v0"
