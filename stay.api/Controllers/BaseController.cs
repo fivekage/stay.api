@@ -43,7 +43,7 @@ namespace stay.api.Controllers
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex.Message);
-                throw ex;
+                Unauthorized();
             }
             claims = JsonConvert.DeserializeObject<FirebaseToken>(await httpResponse.Content.ReadAsStringAsync());
         }
