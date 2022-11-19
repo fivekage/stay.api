@@ -21,13 +21,7 @@ namespace stay.api.Controllers
         [HttpGet(Name = "HomeController")]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            try {
-                await base.GetCurrentUserInfosAsync();
-            }
-            catch(Exception)
-            {
-                Unauthorized();
-            }
+            await base.GetCurrentUserInfosAsync();
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

@@ -1,4 +1,4 @@
-name: Continous Deployement
+name: cd-api
 
 on:
   push:
