@@ -1,12 +1,13 @@
 ﻿using Ardalis.GuardClauses;
 using FireSharp;
+using FireSharp.Interfaces;
 using FireSharp.Response;
 using stay.application.Repository;
 
 public class Repository<T> : IRepository<T> where T : class
 {
-    protected readonly FirebaseClient _firebaseClient;
-    public Repository(FirebaseClient firebaseClient)
+    protected readonly IFirebaseClient _firebaseClient;
+    public Repository(IFirebaseClient firebaseClient)
     {
         _firebaseClient = firebaseClient;
     }

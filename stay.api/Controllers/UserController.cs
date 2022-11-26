@@ -9,12 +9,12 @@ namespace stay.api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HomeController : BaseController
+    public class UserController : BaseController
     {
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration) : base(logger, configuration) { }
+        public UserController(ILogger<UserController> logger, IConfiguration configuration) : base(logger, configuration) { }
 
-        [HttpGet(Name = "HomeController")]
-        public async Task<IActionResult> GetHomeData(IFirebaseUseCase useCase)
+        [HttpGet]
+        public async Task<IActionResult> GetUserData([FromServices] IFirebaseUseCase useCase)
         {
             await base.GetCurrentUserInfosAsync();
 

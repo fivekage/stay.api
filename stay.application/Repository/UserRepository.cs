@@ -1,11 +1,12 @@
 ﻿using FireSharp;
+using FireSharp.Interfaces;
 using stay.application.Models;
 
 namespace stay.application.Repository
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(FirebaseClient firebaseClient) : base(firebaseClient)
+        public UserRepository(IFirebaseClient firebaseClient) : base(firebaseClient)
         {
         }
 

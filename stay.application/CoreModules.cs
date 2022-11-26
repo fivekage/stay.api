@@ -14,7 +14,7 @@ namespace stay.application
         public static IServiceCollection ImplementPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             // Singletons
-            services.AddSingleton<IConfiguration>(configuration);
+            services.AddSingleton(configuration);
             services.AddSingleton<IFirebaseClient>(
                 new FirebaseClient(new FirebaseConfig
                 {
@@ -22,6 +22,7 @@ namespace stay.application
                     BasePath = configuration["Firebase_BasePath"],
                 })
             );
+
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
