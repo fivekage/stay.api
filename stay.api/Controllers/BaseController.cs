@@ -1,5 +1,7 @@
 ﻿using Ardalis.GuardClauses;
+using FirebaseAdmin;
 using FirebaseAdmin.Auth;
+using FireSharp;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,8 +13,7 @@ namespace stay.api.Controllers
         private IConfiguration Configuration { get; }
         protected FirebaseToken Claims { get => claims; }
 
-        private FirebaseToken claims;
-
+        private FirebaseToken? claims;
 
 
         public BaseController(ILogger<BaseController> logger, IConfiguration configuration)
