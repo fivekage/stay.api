@@ -1,5 +1,4 @@
-﻿using FireSharp;
-using FireSharp.Interfaces;
+﻿using FireSharp.Interfaces;
 using stay.application.Models;
 
 namespace stay.application.Repository

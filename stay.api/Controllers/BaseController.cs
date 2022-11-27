@@ -1,7 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using FirebaseAdmin;
 using FirebaseAdmin.Auth;
-using FireSharp;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -14,7 +12,6 @@ namespace stay.api.Controllers
         protected FirebaseToken Claims { get => claims; }
 
         private FirebaseToken? claims;
-
 
         public BaseController(ILogger<BaseController> logger, IConfiguration configuration)
         {
@@ -39,7 +36,6 @@ namespace stay.api.Controllers
             {
                 httpResponse.EnsureSuccessStatusCode();
                 if (httpResponse.Content == null) throw new HttpRequestException("Request succeeded but empty claims");
-
             }
             catch (HttpRequestException ex)
             {

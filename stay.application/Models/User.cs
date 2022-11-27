@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace stay.application.Models
+﻿namespace stay.application.Models
 {
     public class User
     {
@@ -12,6 +6,5 @@ namespace stay.application.Models
         public string Name { get; set; }
         public int Latitude { get; set; }
         public int Longitude { get; set; }
-
     }
 }

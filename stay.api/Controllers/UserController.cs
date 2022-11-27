@@ -1,9 +1,6 @@
-using FirebaseAdmin;
-using FireSharp;
 using Microsoft.AspNetCore.Mvc;
 using stay.application.Interfaces;
 using stay.application.Requests;
-using System.Net;
 
 namespace stay.api.Controllers
 {
@@ -11,7 +8,9 @@ namespace stay.api.Controllers
     [Route("[controller]")]
     public class UserController : BaseController
     {
-        public UserController(ILogger<UserController> logger, IConfiguration configuration) : base(logger, configuration) { }
+        public UserController(ILogger<UserController> logger, IConfiguration configuration) : base(logger, configuration)
+        {
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetUserData([FromServices] IFirebaseUseCase useCase)
@@ -29,6 +28,6 @@ namespace stay.api.Controllers
                 User = Claims
             })
             .ToArray();*/
-         }
+        }
     }
 }
