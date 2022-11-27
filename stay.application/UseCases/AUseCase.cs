@@ -1,5 +1,4 @@
-﻿using FireSharp.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace stay.application.UseCases
 {

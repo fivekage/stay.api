@@ -1,7 +1,3 @@
-using FirebaseAdmin;
-using FireSharp;
-using FireSharp.Config;
-using FireSharp.Interfaces;
 using stay.application;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,16 +17,11 @@ builder.Services.AddHttpClient();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
 app.MapControllers();
-
-
 
 app.Run();

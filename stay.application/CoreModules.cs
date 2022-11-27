@@ -23,7 +23,6 @@ namespace stay.application
                 })
             );
 
-
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
 
