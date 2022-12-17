@@ -38,7 +38,7 @@ namespace stay.application.UseCases
         async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
         {
             return (await ChatRoomRepository.AddChatRoom(
-                new ChatRoom(request.Uuid, request.CreatedBy, request.CreatedBy, request.Longitude, request.Latitude)));
+                new ChatRoom(request.Uuid ,request.CreatedBy, DateTime.Now.Ticks, request.Active, request.Longitude, request.Latitude)));
         }
     }
 }

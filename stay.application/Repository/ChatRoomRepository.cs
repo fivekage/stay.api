@@ -21,12 +21,12 @@ namespace stay.application.Repository
 
         public async Task<ChatRoom> GetChatRoom(string uuid)
         {
-            return (await this.GetAsync($"user/{uuid}")).ResultAs<ChatRoom>();
+            return (await this.GetAsync($"room/{uuid}")).ResultAs<ChatRoom>();
         }
 
         public async Task<IEnumerable<ChatRoom>> GetChatRooms()
         {
-            return (await this.GetAsync($"user/")).ResultAs<IEnumerable<ChatRoom>>();
+            return (await this.GetAsync($"room/")).ResultAs<IEnumerable<ChatRoom>>();
         }
     }
 }

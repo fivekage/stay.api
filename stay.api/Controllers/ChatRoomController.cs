@@ -74,7 +74,7 @@ namespace stay.api.Controllers
             await base.GetCurrentUserInfosAsync();
             try
             {
-                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(body.Uuid, body.CreatedBy, body.Longitude, body.Latitude));
+                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(body.Uuid, body.CreatedBy, true, body.Longitude, body.Latitude));
                 return Ok(result);
             }
             catch (Exception ex)
