@@ -4,6 +4,7 @@ using stay.application.Interfaces;
 using stay.application.Models;
 using stay.application.Repository;
 using stay.application.Requests;
+using stay.application.Requests.User;
 
 namespace stay.application.UseCases
 {

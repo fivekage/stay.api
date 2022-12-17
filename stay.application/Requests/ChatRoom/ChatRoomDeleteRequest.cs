@@ -3,5 +3,10 @@
     public class ChatRoomDeleteRequest
     {
         public string Uuid { get; set; }
+
+        public ChatRoomDeleteRequest(string uuid)
+        {
+            Uuid = uuid;
+        }
     }
 }

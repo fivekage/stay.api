@@ -13,7 +13,7 @@ namespace stay.api.Controllers
 
         private FirebaseToken? claims;
 
-        public BaseController(ILogger<BaseController> logger, IConfiguration configuration)
+        protected BaseController(ILogger<BaseController> logger, IConfiguration configuration)
         {
             _logger = logger;
             Configuration = configuration;

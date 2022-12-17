@@ -7,9 +7,9 @@ namespace stay.application.Interfaces
 {
     public interface IChatRoomUseCase
     {
-        Task<IEnumerable<ChatRoom>> HandleAsync(EmptyResponse response);
-        Task<ChatRoom> HandleAsync(ChatRoomGetRequest request, ChatRoomResponse response);
-        Task<bool> HandleAsync(ChatRoomDeleteRequest request, EmptyResponse response);
-        Task<bool> HandleAsync(ChatRoomPostRequest request, EmptyResponse response);
+        Task<IEnumerable<ChatRoom>> HandleAsync(/*EmptyResponse response*/);
+        Task<ChatRoom> HandleAsync(ChatRoomGetRequest request/*, ChatRoomResponse response*/);
+        Task<bool> HandleAsync(ChatRoomDeleteRequest request/*, EmptyResponse response*/);
+        Task<bool> HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/);
     }
 }

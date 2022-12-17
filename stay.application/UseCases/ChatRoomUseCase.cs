@@ -20,22 +20,22 @@ namespace stay.application.UseCases
             ChatRoomRepository = chatRoomRepository;
         }
 
-        async Task<IEnumerable<ChatRoom>> IChatRoomUseCase.HandleAsync(EmptyResponse response)
+        async Task<IEnumerable<ChatRoom>> IChatRoomUseCase.HandleAsync(/*EmptyResponse response*/)
         {
             return (await ChatRoomRepository.GetChatRooms());
         }
 
-        async Task<ChatRoom> IChatRoomUseCase.HandleAsync(ChatRoomGetRequest request, ChatRoomResponse response)
+        async Task<ChatRoom> IChatRoomUseCase.HandleAsync(ChatRoomGetRequest request/*, ChatRoomResponse response*/)
         {
             return (await ChatRoomRepository.GetChatRoom(request.Uuid));
         }
 
-        async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomDeleteRequest request, EmptyResponse response)
+        async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomDeleteRequest request/*, EmptyResponse response*/)
         {
             return (await ChatRoomRepository.DeleteChatRoom(request.Uuid));
         }
 
-        async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request, EmptyResponse response)
+        async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
         {
             return (await ChatRoomRepository.AddChatRoom(
                 new ChatRoom(request.Uuid, request.CreatedBy, request.CreatedBy, request.Longitude, request.Latitude)));

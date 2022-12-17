@@ -6,7 +6,7 @@ namespace stay.application.UseCases
     {
         public IConfiguration Configuration { get; }
 
-        public AUseCase(IConfiguration configuration)
+        protected AUseCase(IConfiguration configuration)
         {
             Configuration = configuration;
         }

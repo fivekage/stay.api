@@ -12,5 +12,13 @@ namespace stay.application.Requests.ChatRoom
         public string CreatedBy { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+
+        public ChatRoomPostRequest(string uuid, string createdBy, double longitude, double latitude)
+        {
+            Uuid = uuid;
+            CreatedBy = createdBy;
+            Longitude = longitude;
+            Latitude = latitude;
+        }
     }
 }
