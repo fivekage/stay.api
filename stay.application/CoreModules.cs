@@ -25,9 +25,11 @@ namespace stay.application
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
 
             // UseCases
-            services.AddScoped<IFirebaseUseCase, FirebaseUseCase>();
+            services.AddScoped<IUserUseCase, UserUseCase>();
+            services.AddScoped<IChatRoomUseCase, ChatRoomUseCase>();
 
             return services;
         }

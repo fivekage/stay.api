@@ -4,21 +4,22 @@ using stay.application.Interfaces;
 using stay.application.Models;
 using stay.application.Repository;
 using stay.application.Requests;
+using stay.application.Requests.User;
 
 namespace stay.application.UseCases
 {
-    public class FirebaseUseCase : AUseCase, IFirebaseUseCase
+    public class UserUseCase : AUseCase, IUserUseCase
     {
         public FirebaseClient FirebaseClient { get; }
 
         public IUserRepository UserRepository { get; }
 
-        public FirebaseUseCase(IConfiguration configuration, IUserRepository userRepository) : base(configuration)
+        public UserUseCase(IConfiguration configuration, IUserRepository userRepository) : base(configuration)
         {
             UserRepository = userRepository;
         }
 
-        public async Task<User> HandleAsync(FirebaseUseCaseRequest request)
+        public async Task<User> HandleAsync(UserRequest request)
         {
             return await UserRepository.GetUserByUUID(request.UserUUID);
         }

@@ -6,7 +6,7 @@ namespace stay.application.Repository
     {
         Task<FirebaseResponse> GetAsync(string path);
 
-        Task<PushResponse> AddAsync(string path, T entity);
+        Task<T> AddAsync(string path, T entity);
 
         Task<FirebaseResponse> UpdateAsync(string path, T entity);
 
