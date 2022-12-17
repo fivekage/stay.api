@@ -27,7 +27,7 @@ namespace stay.application
             services.AddScoped<IUserRepository, UserRepository>();
 
             // UseCases
-            services.AddScoped<IFirebaseUseCase, FirebaseUseCase>();
+            services.AddScoped<IUserUseCase, UserUseCase>();
 
             return services;
         }

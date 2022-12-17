@@ -12,13 +12,12 @@ public class Repository<T> : IRepository<T> where T : class
         _firebaseClient = firebaseClient;
     }
 
-    public async Task<PushResponse> AddAsync(string path, T entity)
+    public async Task<T> AddAsync(string path, T entity)
     {
         Guard.Against.NullOrEmpty(path, nameof(path));
         Guard.Against.Null(entity, nameof(entity));
 
-        PushResponse response = await _firebaseClient.PushAsync(path, entity);
-        return response;
+        return (await _firebaseClient.SetAsync(path, entity)).ResultAs<T>();
     }
 
     public async Task<FirebaseResponse> DeleteAsync(string path)

@@ -13,11 +13,11 @@ namespace stay.api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserData([FromServices] IFirebaseUseCase useCase)
+        public async Task<IActionResult> GetUserData([FromServices] IUserUseCase useCase)
         {
             await base.GetCurrentUserInfosAsync();
 
-            var result = await useCase.HandleAsync(new FirebaseUseCaseRequest(Claims.Uid));
+            var result = await useCase.HandleAsync(new UserRequest(Claims.Uid));
             return Ok(result);
 
             /*return Enumerable.Range(1, 5).Select(index => new WeatherForecast

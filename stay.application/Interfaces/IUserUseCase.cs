@@ -3,8 +3,8 @@ using stay.application.Requests;
 
 namespace stay.application.Interfaces
 {
-    public interface IFirebaseUseCase
+    public interface IUserUseCase
     {
-        Task<User> HandleAsync(FirebaseUseCaseRequest request);
+        Task<User> HandleAsync(UserRequest request);
     }
 }
