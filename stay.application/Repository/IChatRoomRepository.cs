@@ -9,7 +9,7 @@ namespace stay.application.Repository
 {
     public interface IChatRoomRepository
     {
-        Task<IEnumerable<ChatRoom>> GetChatRooms();
+        Task<List<KeyValuePair<string, ChatRoom>>> GetChatRooms();
         Task<ChatRoom> GetChatRoom(string uuid);
         Task<bool> AddChatRoom(ChatRoom chatroom);
         Task<bool> DeleteChatRoom(string uuid);

@@ -20,7 +20,7 @@ namespace stay.application.UseCases
             ChatRoomRepository = chatRoomRepository;
         }
 
-        async Task<IEnumerable<ChatRoom>> IChatRoomUseCase.HandleAsync(/*EmptyResponse response*/)
+        async Task<List<KeyValuePair<string, ChatRoom>>> IChatRoomUseCase.HandleAsync(/*EmptyResponse response*/)
         {
             return (await ChatRoomRepository.GetChatRooms());
         }
@@ -38,7 +38,21 @@ namespace stay.application.UseCases
         async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
         {
             return (await ChatRoomRepository.AddChatRoom(
-                new ChatRoom(request.Uuid ,request.CreatedBy, DateTime.Now, request.Active, request.Longitude, request.Latitude)));
+                new ChatRoom(request.Uuid ,request.CreatedBy, DateTime.Now, request.Active, request.Longitude, request.Latitude, new Dictionary<string, object>())));
+        }
+
+        async Task<List<KeyValuePair<string, ChatRoom>>> IChatRoomUseCase.HandleAsync(ChatRoomGetByLocationRequest request)
+        {
+            // 1 deg = 110.574 km
+            double degRange = 5 / 110574; //5 km
+
+            var chatRooms = (await ChatRoomRepository.GetChatRooms());
+
+            return chatRooms.Where(x => 
+            x.Value.Longitude < request.Longitude + degRange &&
+            x.Value.Longitude > request.Longitude - degRange &&
+            x.Value.Latitude < request.Latitude + degRange &&
+            x.Value.Latitude > request.Latitude - degRange).ToList();
         }
     }
 }
