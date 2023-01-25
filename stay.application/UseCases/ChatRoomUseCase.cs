@@ -38,7 +38,18 @@ namespace stay.application.UseCases
         async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
         {
             return (await ChatRoomRepository.AddChatRoom(
-                new ChatRoom(request.Uuid ,request.CreatedBy, DateTime.Now, request.Active, request.Longitude, request.Latitude, new Dictionary<string, object>())));
+                new ChatRoom(
+                    request.Uuid,
+                    request.Name,
+                    request.Description, 
+                    request.CreatedBy, 
+                    DateTime.Now, 
+                    request.Active, 
+                    request.Longitude, 
+                    request.Latitude,
+                    request.Radius,
+                    request.CircleColor,
+                    new Dictionary<string, object>())));
         }
 
         async Task<List<KeyValuePair<string, ChatRoom>>> IChatRoomUseCase.HandleAsync(ChatRoomGetByLocationRequest request)

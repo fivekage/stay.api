@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using stay.api.Models;
+using stay.application.Extensions;
 using stay.application.Interfaces;
 using stay.application.Models;
 using stay.application.Requests.ChatRoom;
@@ -9,7 +10,7 @@ using System.Globalization;
 namespace stay.api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/chat-room")]
     public class ChatRoomController : BaseController
     {
         private IChatRoomUseCase UseCase;
@@ -77,7 +78,15 @@ namespace stay.api.Controllers
             await base.GetCurrentUserInfosAsync();
             try
             {
-                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(body.Uuid, body.CreatedBy, true, body.Longitude, body.Latitude));
+                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(body.Uid, 
+                    body.Name.CapitalizeFirstLetter(), 
+                    body.Description.CapitalizeFirstLetter(),
+                    body.CreatedBy.CapitalizeFirstLetter(), 
+                    true, 
+                    body.Longitude,
+                    body.Latitude, 
+                    body.Radius,
+                    body.Color));
                 return Ok(result);
             }
             catch (Exception ex)
