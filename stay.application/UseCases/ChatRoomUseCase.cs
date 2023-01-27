@@ -35,11 +35,12 @@ namespace stay.application.UseCases
             return (await ChatRoomRepository.DeleteChatRoom(request.Uuid));
         }
 
-        async Task<bool> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
+        async Task<string> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
         {
-            return (await ChatRoomRepository.AddChatRoom(
+            Guid uid = Guid.NewGuid();
+            if(await ChatRoomRepository.AddChatRoom(
                 new ChatRoom(
-                    request.Uuid,
+                    uid.ToString(),
                     request.Name,
                     request.Description, 
                     request.CreatedBy, 
@@ -49,7 +50,10 @@ namespace stay.application.UseCases
                     request.Latitude,
                     request.Radius,
                     request.CircleColor,
-                    new Dictionary<string, object>())));
+                    new Dictionary<string, object>()))) {
+                return uid.ToString();
+            }
+            return string.Empty;
         }
 
         async Task<List<KeyValuePair<string, ChatRoom>>> IChatRoomUseCase.HandleAsync(ChatRoomGetByLocationRequest request)

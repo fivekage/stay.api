@@ -4,8 +4,6 @@ namespace stay.api.Models
 {
     public class ChatRoomBodyRequest
     {
-        [Required]
-        public string Uid { get; set; }
 
         [Required]
         public string Name { get; set; }

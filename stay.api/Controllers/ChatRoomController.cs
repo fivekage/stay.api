@@ -78,7 +78,7 @@ namespace stay.api.Controllers
             await base.GetCurrentUserInfosAsync();
             try
             {
-                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(body.Uid, 
+                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(
                     body.Name.CapitalizeFirstLetter(), 
                     body.Description.CapitalizeFirstLetter(),
                     body.CreatedBy.CapitalizeFirstLetter(), 

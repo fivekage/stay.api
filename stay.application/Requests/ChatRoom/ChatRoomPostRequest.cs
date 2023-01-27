@@ -4,7 +4,6 @@ namespace stay.application.Requests.ChatRoom
 {
     public class ChatRoomPostRequest
     {
-        public string Uuid { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string CreatedBy { get; set; }
@@ -14,9 +13,8 @@ namespace stay.application.Requests.ChatRoom
         public string CircleColor { get; set; }
         public bool Active { get; set; }
 
-        public ChatRoomPostRequest(string uuid, string name, string description, string createdBy, bool active, double longitude, double latitude, double radius, string color)
+        public ChatRoomPostRequest( string name, string description, string createdBy, bool active, double longitude, double latitude, double radius, string color)
         {
-            Uuid = uuid;
             Name = name;
             Description = description;
             Active = active;
