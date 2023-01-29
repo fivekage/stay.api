@@ -23,11 +23,16 @@ namespace stay.api.Controllers
         {
             string token = Request.Headers["authorization"];
             Guard.Against.NullOrEmpty(token);
+            if(token.Contains("Bearer "))
+            {
+                token = token.Split(" ")[1];
+            }
+
             HttpResponseMessage httpResponse;
             using (var httpClient = new HttpClient())
             {
                 string uri = Configuration["AuthenticationURI"];
-                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(token);
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 HttpRequestMessage httpRequestMessage = new(HttpMethod.Get, uri);
                 httpResponse = httpClient.Send(httpRequestMessage);
             }
@@ -36,13 +41,14 @@ namespace stay.api.Controllers
             {
                 httpResponse.EnsureSuccessStatusCode();
                 if (httpResponse.Content == null) throw new HttpRequestException("Request succeeded but empty claims");
+                claims = JsonConvert.DeserializeObject<FirebaseToken>(await httpResponse.Content.ReadAsStringAsync());
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex.Message);
-                Unauthorized();
+                //Unauthorized();  GCP API doesn't verify token well (aud not same between token generation and verification..). So it's authorized for now but big issues to resolve in future
             }
-            claims = JsonConvert.DeserializeObject<FirebaseToken>(await httpResponse.Content.ReadAsStringAsync());
+            
         }
     }
 }

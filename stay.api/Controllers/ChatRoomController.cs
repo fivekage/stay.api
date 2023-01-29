@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using stay.api.Models;
+using stay.application.Extensions;
 using stay.application.Interfaces;
+using stay.application.Models;
 using stay.application.Requests.ChatRoom;
+using System.Globalization;
 
 namespace stay.api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/chat-room")]
     public class ChatRoomController : BaseController
     {
         private IChatRoomUseCase UseCase;
@@ -74,7 +78,42 @@ namespace stay.api.Controllers
             await base.GetCurrentUserInfosAsync();
             try
             {
-                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(body.Uuid, body.CreatedBy, true, body.Longitude, body.Latitude));
+                var result = await UseCase.HandleAsync(new ChatRoomPostRequest(
+                    body.Name.CapitalizeFirstLetter(), 
+                    body.Description.CapitalizeFirstLetter(),
+                    body.CreatedBy.CapitalizeFirstLetter(), 
+                    true, 
+                    body.Longitude,
+                    body.Latitude, 
+                    body.Radius,
+                    body.Color));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// Get Rooms in a dimension of 5km around a location given by the user
+        /// </summary>
+        /// <param name="longitude"></param>
+        /// <param name="latitude"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetRoomsByLocation(
+            [FromQuery] string longitude,
+            [FromQuery] string latitude)
+        {
+            await base.GetCurrentUserInfosAsync();
+            if (String.IsNullOrEmpty(longitude) || String.IsNullOrEmpty(latitude))
+                return BadRequest();
+
+            try
+            {
+                List<KeyValuePair<string, ChatRoom>> result = await UseCase.HandleAsync(new ChatRoomGetByLocationRequest(double.Parse(longitude, CultureInfo.InvariantCulture), double.Parse(latitude, CultureInfo.InvariantCulture)));
+
                 return Ok(result);
             }
             catch (Exception ex)

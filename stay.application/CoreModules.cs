@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using stay.application.Interfaces;
 using stay.application.Repository;
 using stay.application.UseCases;
+using Firebase.Database;
 
 namespace stay.application
 {
@@ -16,12 +17,16 @@ namespace stay.application
             // Singletons
             services.AddSingleton(configuration);
             services.AddSingleton<IFirebaseClient>(
-                new FirebaseClient(new FirebaseConfig
+                new FireSharp.FirebaseClient(new FirebaseConfig
                 {
                     AuthSecret = configuration["Firebase_AuthSecret"],
                     BasePath = configuration["Firebase_BasePath"],
                 })
             );
+
+            services.AddSingleton<Firebase.Database.FirebaseClient>(
+                new Firebase.Database.FirebaseClient(configuration["Firebase_BasePath"].ToString())
+            ) ;
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();

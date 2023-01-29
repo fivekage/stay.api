@@ -16,6 +16,13 @@ builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
+app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+
+app.UseHttpsRedirection();
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
