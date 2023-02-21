@@ -4,8 +4,8 @@ using stay.application.Interfaces;
 using stay.application.Models;
 using stay.application.Repository;
 using stay.application.Requests.ChatRoom;
-using stay.application.Responses;
-using stay.application.Responses.ChatRoom;
+using System.Device.Location;
+using System.Linq;
 
 namespace stay.application.UseCases
 {
@@ -20,9 +20,9 @@ namespace stay.application.UseCases
             ChatRoomRepository = chatRoomRepository;
         }
 
-        async Task<List<KeyValuePair<string, ChatRoom>>> IChatRoomUseCase.HandleAsync(/*EmptyResponse response*/)
+        async Task<IEnumerable<ChatRoom>> IChatRoomUseCase.HandleAsync(/*EmptyResponse response*/)
         {
-            return (await ChatRoomRepository.GetChatRooms());
+            return (await ChatRoomRepository.GetChatRooms()).Select(x => x.Value);
         }
 
         async Task<ChatRoom> IChatRoomUseCase.HandleAsync(ChatRoomGetRequest request/*, ChatRoomResponse response*/)
@@ -56,18 +56,19 @@ namespace stay.application.UseCases
             return string.Empty;
         }
 
-        async Task<List<KeyValuePair<string, ChatRoom>>> IChatRoomUseCase.HandleAsync(ChatRoomGetByLocationRequest request)
+        async Task<IEnumerable<ChatRoom>> IChatRoomUseCase.HandleAsync(ChatRoomGetByLocationRequest request)
         {
-            // 1 deg = 110.574 km
-            double degRange = 5 / 110574; //5 km
+            GeoCoordinate userCoord = new GeoCoordinate(request.Latitude, request.Longitude);
 
-            var chatRooms = (await ChatRoomRepository.GetChatRooms());
+            List<ChatRoom> chatRooms = new List<ChatRoom>();
 
-            return chatRooms.Where(x => 
-            x.Value.Longitude < request.Longitude + degRange &&
-            x.Value.Longitude > request.Longitude - degRange &&
-            x.Value.Latitude < request.Latitude + degRange &&
-            x.Value.Latitude > request.Latitude - degRange).ToList();
+            foreach(var rooms in await ChatRoomRepository.GetChatRooms())
+            {
+                var roomsCoord = new GeoCoordinate(rooms.Value.Latitude, rooms.Value.Longitude);
+                if (userCoord.GetDistanceTo(roomsCoord) < rooms.Value.Radius)
+                    chatRooms.Add(rooms.Value);
+            }
+            return chatRooms;
         }
     }
 }
