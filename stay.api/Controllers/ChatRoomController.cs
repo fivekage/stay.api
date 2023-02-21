@@ -112,7 +112,7 @@ namespace stay.api.Controllers
 
             try
             {
-                List<KeyValuePair<string, ChatRoom>> result = await UseCase.HandleAsync(new ChatRoomGetByLocationRequest(double.Parse(longitude, CultureInfo.InvariantCulture), double.Parse(latitude, CultureInfo.InvariantCulture)));
+                IEnumerable<ChatRoom> result = await UseCase.HandleAsync(new ChatRoomGetByLocationRequest(double.Parse(longitude, CultureInfo.InvariantCulture), double.Parse(latitude, CultureInfo.InvariantCulture)));
 
                 return Ok(result);
             }
