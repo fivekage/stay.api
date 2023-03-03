@@ -31,10 +31,12 @@ namespace stay.application
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
 
             // UseCases
             services.AddScoped<IUserUseCase, UserUseCase>();
             services.AddScoped<IChatRoomUseCase, ChatRoomUseCase>();
+            services.AddScoped<IMessageUseCase, MessageUseCase>();
 
             return services;
         }
