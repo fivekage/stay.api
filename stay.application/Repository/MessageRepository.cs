@@ -16,5 +16,10 @@ namespace stay.application.Repository
         {
             return (await this.AddAsync($"{ChatRoomRepository.PATH}{message.ChatRoomUid}/{PATH}{message.Uid}", message)) != null;
         }
+
+        public async Task<List<KeyValuePair<string, Message>>> GetMessages(string chatRoomUid)
+        {
+            return await this.GetAllAsync($"{ChatRoomRepository.PATH}{chatRoomUid}/{PATH}");
+        }
     }
 }

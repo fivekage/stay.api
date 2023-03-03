@@ -16,8 +16,23 @@ namespace stay.api.Controllers
             UseCase = useCase;
         }
 
+        [HttpGet("{chatroom}/messages")]
+        public async Task<IActionResult> GetMessages([FromRoute] string chatroom)
+        {
+            await base.GetCurrentUserInfosAsync();
+            try
+            {
+                var result = await UseCase.HandleAsync(new MessagesGetRequest(chatroom));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost()]
-        public async Task<IActionResult> GetRoom(
+        public async Task<IActionResult> AddMessage(
             [FromBody] MessageBodyRequest body)
         {
             await base.GetCurrentUserInfosAsync();
