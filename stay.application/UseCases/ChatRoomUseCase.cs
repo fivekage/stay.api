@@ -1,11 +1,10 @@
-﻿using FireSharp;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using stay.application.Interfaces;
 using stay.application.Models;
 using stay.application.Repository;
 using stay.application.Requests.ChatRoom;
-using System.Device.Location;
-using System.Linq;
+using stay.application.Tools;
+using stay.application.Tools.GeoLocation;
 
 namespace stay.application.UseCases
 {
@@ -36,19 +35,20 @@ namespace stay.application.UseCases
         async Task<string> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
         {
             Guid uid = Guid.NewGuid();
-            if(await ChatRoomRepository.AddChatRoom(
+            if (await ChatRoomRepository.AddChatRoom(
                 new ChatRoom(
                     uid.ToString(),
                     request.Name,
-                    request.Description, 
-                    request.CreatedBy, 
-                    DateTime.Now, 
-                    request.Active, 
-                    request.Longitude, 
+                    request.Description,
+                    request.CreatedBy,
+                    DateTime.Now,
+                    request.Active,
+                    request.Longitude,
                     request.Latitude,
                     request.Radius,
                     request.CircleColor,
-                    new Dictionary<string, object>()))) {
+                    new Dictionary<string, object>())))
+            {
                 return uid.ToString();
             }
             return string.Empty;
@@ -56,15 +56,15 @@ namespace stay.application.UseCases
 
         async Task<IEnumerable<ChatRoom>> IChatRoomUseCase.HandleAsync(ChatRoomGetByLocationRequest request)
         {
-            GeoCoordinate userCoord = new GeoCoordinate(request.Latitude, request.Longitude);
+            Coordinate userCoord = new Coordinate(request.Latitude, request.Longitude);
 
             List<ChatRoom> chatRooms = new List<ChatRoom>();
 
-            foreach(var rooms in await ChatRoomRepository.GetChatRooms())
+            foreach (var room in await ChatRoomRepository.GetChatRooms())
             {
-                var roomsCoord = new GeoCoordinate(rooms.Value.Latitude, rooms.Value.Longitude);
-                if (userCoord.GetDistanceTo(roomsCoord) < rooms.Value.Radius)
-                    chatRooms.Add(rooms.Value);
+                var roomsCoord = new Coordinate(room.Value.Latitude, room.Value.Longitude);
+                if (GeoCalculator.GetDistance(userCoord, roomsCoord,1) < room.Value.Radius)
+                    chatRooms.Add(room.Value);
             }
             return chatRooms;
         }
