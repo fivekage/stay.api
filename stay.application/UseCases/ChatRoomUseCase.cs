@@ -11,8 +11,6 @@ namespace stay.application.UseCases
 {
     public class ChatRoomUseCase : AUseCase, IChatRoomUseCase
     {
-        public FirebaseClient FirebaseClient { get; }
-
         public IChatRoomRepository ChatRoomRepository { get; }
 
         public ChatRoomUseCase(IConfiguration configuration, IChatRoomRepository chatRoomRepository) : base(configuration)
