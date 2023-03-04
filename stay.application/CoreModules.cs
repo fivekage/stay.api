@@ -26,7 +26,7 @@ namespace stay.application
             );
 
             _ = services.AddSingleton<Firebase.Database.FirebaseClient>(
-                new Firebase.Database.FirebaseClient(Firebase_BasePath.ToString())
+                new Firebase.Database.FirebaseClient(Firebase_BasePath)
             );
 
             // Repositories
