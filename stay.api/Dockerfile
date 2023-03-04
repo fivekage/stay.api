@@ -9,17 +9,17 @@ ENV ASPNETCORE_URLS=http://*:8080
 # Build
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ../stay.api/*.csproj stay.api/
-COPY ../stay.application/*.csproj stay.application/
-COPY ../stay.domain/*.csproj stay.domain/
-COPY ../stay.infrastructure/*.csproj stay.infrastructure/
+COPY stay.api/*.csproj stay.api/
+COPY stay.application/*.csproj stay.application/
+COPY stay.domain/*.csproj stay.domain/
+COPY stay.infrastructure/*.csproj stay.infrastructure/
 
 RUN dotnet restore stay.api/stay.api.csproj
 
-COPY ../stay.api/ stay.api/
-COPY ../stay.application/ stay.application/
-COPY ../stay.domain/ stay.domain/
-COPY ../stay.infrastructure/ stay.infrastructure/
+COPY stay.api/ stay.api/
+COPY stay.application/ stay.application/
+COPY stay.domain/ stay.domain/
+COPY stay.infrastructure/ stay.infrastructure/
 
 WORKDIR /src/stay.api
 RUN dotnet build -c release -o /app/build
