@@ -45,5 +45,5 @@ jobs:
       - name: "Deploy to App Engine"
         uses: "google-github-actions/deploy-appengine@v0"
         with:
-          deliverables: "./stay.api/app.yaml"
+          image: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA
           version: "v1"
