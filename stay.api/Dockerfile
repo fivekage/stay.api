@@ -5,8 +5,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80 443 8080
 ENV ASPNETCORE_URLS=http://*:8080
-ENV Firebase_BasePath=https://stay-366013-default-rtdb.europe-west1.firebasedatabase.app/
-ENV Firebase_AuthSecret=AIzaSyAuAiiy4TuQkAEfocIIvxW8nTxzvsoAOLg
 
 # Build
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
