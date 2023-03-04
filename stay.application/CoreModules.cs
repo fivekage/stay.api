@@ -14,19 +14,20 @@ namespace stay.application
     {
         public static IServiceCollection ImplementPersistence(this IServiceCollection services, IConfiguration configuration)
         {
+            string Firebase_BasePath = configuration["Firebase_BasePath"] ?? string.Empty;
             // Singletons
             services.AddSingleton(configuration);
             services.AddSingleton<IFirebaseClient>(
                 new FireSharp.FirebaseClient(new FirebaseConfig
                 {
                     AuthSecret = configuration["Firebase_AuthSecret"],
-                    BasePath = configuration["Firebase_BasePath"],
+                    BasePath = Firebase_BasePath,
                 })
             );
 
-            services.AddSingleton<Firebase.Database.FirebaseClient>(
-                new Firebase.Database.FirebaseClient(configuration["Firebase_BasePath"].ToString())
-            ) ;
+            _ = services.AddSingleton<Firebase.Database.FirebaseClient>(
+                new Firebase.Database.FirebaseClient(Firebase_BasePath.ToString())
+            );
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
