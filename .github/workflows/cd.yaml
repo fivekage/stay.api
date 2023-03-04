@@ -18,7 +18,8 @@ jobs:
       GCP_LOCATION: ${{ secrets.GCP_LOCATION }}
       GAR_IMAGE: ${{ secrets.GAR_IMAGE }}
       GAR_REPOSITORY: ${{ secrets.GAR_REPOSITORY }}
-
+      Firebase_BasePath: ${{ secrets.FIREBASE_BASEPATH }}
+      Firebase_AuthSecret: ${{ secrets.FIREBASE_AUTHSECRET }}
     defaults:
       run:
         shell: bash
