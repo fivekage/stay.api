@@ -13,20 +13,14 @@ jobs:
     environment: production
     runs-on: ubuntu-latest
     env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-      GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-      GCP_LOCATION: ${{ secrets.GCP_LOCATION }}
-      GAR_IMAGE: ${{ secrets.GAR_IMAGE }}
-      GAR_REPOSITORY: ${{ secrets.GAR_REPOSITORY }}
-      Firebase_BasePath: ${{ secrets.FIREBASE_BASEPATH }}
-      Firebase_AuthSecret: ${{ secrets.FIREBASE_AUTHSECRET }}
+      GITHUB_SHA: ${{ github.sha }}
     defaults:
       run:
         shell: bash
 
     steps:
       - uses: actions/checkout@v3
-      # Login to Google Cloud
+
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v0"
@@ -40,16 +34,16 @@ jobs:
       - name: Build and push
         id: build_and_push
         run: |
-          docker build -f stay.api/Dockerfile -t ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA .
-          docker push ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA
+          docker build -f stay.api/Dockerfile -t ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:${{ env.GITHUB_SHA }} .
+          docker push ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:${{ env.GITHUB_SHA }}
 
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
-          image: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:$GITHUB_SHA
+          service: ${{ vars.SERVICE }}
+          region: ${{ vars.REGION }}
+          image: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ secrets.GAR_REPOSITORY }}/${{ secrets.GAR_IMAGE }}:${{ env.GITHUB_SHA }}
 
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
