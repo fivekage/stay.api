@@ -33,11 +33,13 @@ namespace stay.application
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IDirectLinkRepository, DirectLinkRepository>();
 
             // UseCases
             services.AddScoped<IUserUseCase, UserUseCase>();
             services.AddScoped<IChatRoomUseCase, ChatRoomUseCase>();
             services.AddScoped<IMessageUseCase, MessageUseCase>();
+            services.AddScoped<IDirectLinkUseCase, DirectLinkUseCase>();
 
             return services;
         }
