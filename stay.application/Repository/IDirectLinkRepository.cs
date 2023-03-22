@@ -4,8 +4,8 @@ namespace stay.application.Repository
 {
     public interface IDirectLinkRepository
     {
-        Task<List<KeyValuePair<string, DirectLink>>> GetLinks();
-        Task<DirectLink> GetLink(string me, string uuid);
+        Task<List<KeyValuePair<string, DirectLink>>> GetLinks(string me);
+        Task<DirectLink> GetLink(string guid);
         Task<bool> AddLink(DirectLink link);
     }
 }

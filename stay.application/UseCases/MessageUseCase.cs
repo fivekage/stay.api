@@ -15,17 +15,24 @@ namespace stay.application.UseCases
             MessageRepository = messageRepository;
         }
 
-        public async Task<string> HandleAsync(MessagePostRequest request)
+        public async Task<string> HandleAsync(ChannelMessagePostRequest request)
         {
-            Guid uid = Guid.NewGuid();
-            if (await MessageRepository.PostMessage(new Message(uid.ToString(), request.ChatRoomUid, request.Message, request.WritedAt, request.WritedBy)))
-                return uid.ToString();
+            if (await MessageRepository.PostMessage(new ChannelMessage(request.ChatRoomUid, request.Message, request.WritedAt, request.WritedBy)))
+                return request.ChatRoomUid;
             return string.Empty;
         }
 
         public async Task<IEnumerable<Message>> HandleAsync(MessagesGetRequest request)
         {
             return (await MessageRepository.GetMessages(request.ChatRoomUid)).Select(x => x.Value);
+        }
+
+        public async Task<string> HandleAsync(PrivateMessagePostRequest request)
+        {
+            Guid uid = Guid.NewGuid();
+            if (await MessageRepository.PostMessage(new PrivateMessage(request.Guid, request.Message, request.WritedAt, request.WritedBy)))
+                return uid.ToString();
+            return string.Empty;
         }
     }
 }

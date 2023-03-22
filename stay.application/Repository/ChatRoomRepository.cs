@@ -28,19 +28,7 @@ namespace stay.application.Repository
 
         public async Task<List<KeyValuePair<string, ChatRoom>>> GetChatRooms()
         {
-
-            return (await this.GetAllAsync("room"));
-            /*var resultFirebase = (await this.GetAsync($"room/*"));
-            dynamic resultChatRooms = null;
-            try
-            {
-                return resultChatRooms = resultFirebase.ResultAs<IEnumerable<ChatRoom>>();
-            } catch(Exception)
-            {
-                resultChatRooms = resultFirebase.ResultAs<ChatRoom>();
-            }
-            return new List<ChatRoom> { resultChatRooms };*/
-
+            return (await this.GetAllAsync(PATH));
         }
     }
 }

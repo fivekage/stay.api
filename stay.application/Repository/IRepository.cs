@@ -8,6 +8,8 @@ namespace stay.application.Repository
 
         Task<T> AddAsync(string path, T entity);
 
+        Task<T> PushAsync(string path, T entity);
+
         Task<FirebaseResponse> UpdateAsync(string path, T entity);
 
         Task<FirebaseResponse> DeleteAsync(string path);

@@ -5,22 +5,16 @@ namespace stay.application.Models
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DirectLink
     {
-        public string Me { get; set; }
-        public string UserUuid { get; set; }
-        public string Username { get; set; } = string.Empty;
+        [JsonProperty(PropertyName = "RoomUID")]
+        public string Guid { get; set; }
 
-        public DirectLink(string me, string userUuid)
-        {
-            Me = me;
-            UserUuid = userUuid;
-        }
+        [JsonProperty(PropertyName = "Members")]
+        public List<string> Members { get; set; }
 
-        [JsonConstructor]
-        public DirectLink(string me, string userUuid, string username)
+        public DirectLink(string guid, List<string> members)
         {
-            Me = me;
-            UserUuid = userUuid;
-            Username = username;
+            Guid = guid;
+            Members = members;
         }
     }
 }

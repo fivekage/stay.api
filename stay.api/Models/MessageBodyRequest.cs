@@ -8,12 +8,6 @@ namespace stay.api.Models
     public class MessageBodyRequest
     {
         /// <summary>
-        /// Chat Room
-        /// </summary>
-        [Required]
-        public string ChatRoomUid { get; set; } = string.Empty;
-
-        /// <summary>
         /// Message content
         /// </summary>
         [Required]

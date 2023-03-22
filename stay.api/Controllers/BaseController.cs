@@ -23,6 +23,7 @@ namespace stay.api.Controllers
         {
             string token = Request.Headers["authorization"];
             Guard.Against.NullOrEmpty(token);
+
             if(token.Contains("Bearer "))
             {
                 token = token.Split(" ")[1];

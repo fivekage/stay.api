@@ -5,7 +5,8 @@ namespace stay.application.Interfaces
 {
     public interface IMessageUseCase
     {
-        Task<string> HandleAsync(MessagePostRequest request/*EmptyResponse response*/);
+        Task<string> HandleAsync(ChannelMessagePostRequest request/*EmptyResponse response*/);
+        Task<string> HandleAsync(PrivateMessagePostRequest request);
 
         Task<IEnumerable<Message>> HandleAsync(MessagesGetRequest request);
     }

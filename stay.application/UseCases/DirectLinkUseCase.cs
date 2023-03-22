@@ -3,6 +3,7 @@ using stay.application.Interfaces;
 using stay.application.Models;
 using stay.application.Repository;
 using stay.application.Requests.DirectLink;
+using System.Linq;
 
 namespace stay.application.UseCases
 {
@@ -16,17 +17,18 @@ namespace stay.application.UseCases
 
         async Task<bool> IDirectLinkUseCase.HandleAsync(DirectLinkPostRequest request)
         {
-            return (await DirectLinkRepository.AddLink(new DirectLink(request.me, request.useruuid)));
+            Guid guid = Guid.NewGuid();
+            return (await DirectLinkRepository.AddLink(new DirectLink(guid.ToString(), new List<string> () { request.me, request.useruuid } )));
         }
 
         async Task<IEnumerable<DirectLink>> IDirectLinkUseCase.HandleAsync(DirectLinksGetRequest request)
         {
-            return (await DirectLinkRepository.GetLinks()).Select(x => x.Value).Where(y => y.Me == request.Me || y.UserUuid == request.Me);
+            return (await DirectLinkRepository.GetLinks(request.Me)).Select(x => x.Value).Where(y => y.Members.Contains(request.Me));
         }
 
         async Task<DirectLink> IDirectLinkUseCase.HandleAsync(DirectLinkGetRequest request)
         {
-            return (await DirectLinkRepository.GetLink(request.Me, request.UserUuid));
+            return (await DirectLinkRepository.GetLink(request.Guid));
         }
     }
 }

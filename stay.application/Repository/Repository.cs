@@ -24,6 +24,14 @@ public class Repository<T> : IRepository<T> where T : class
         return (await _firebaseClient.SetAsync(path, entity)).ResultAs<T>();
     }
 
+    public async Task<T> PushAsync(string path, T entity)
+    {
+        Guard.Against.NullOrEmpty(path, nameof(path));
+        Guard.Against.Null(entity, nameof(entity));
+
+        return (await _firebaseClient.PushAsync(path, entity)).ResultAs<T>();
+    }
+
     public async Task<FirebaseResponse> DeleteAsync(string path)
     {
         Guard.Against.NullOrEmpty(path, nameof(path));

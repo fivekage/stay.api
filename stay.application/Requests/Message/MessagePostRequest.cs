@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace stay.application.Requests.Message
+﻿namespace stay.application.Requests.Message
 {
     public class MessagePostRequest
     {
-        /// <summary>
-        /// Chat Room
-        /// </summary>
-        public string ChatRoomUid { get; set; }
+        
 
         /// <summary>
         /// Message content
@@ -22,11 +17,10 @@ namespace stay.application.Requests.Message
         /// <summary>
         /// Uid of the user who writed it
         /// </summary>
-        public string WritedBy { get; set; } 
+        public string WritedBy { get; set; }
 
-        public MessagePostRequest(string chatRoomUid, string message, DateTime writedAt, string writedBy)
+        public MessagePostRequest(string message, DateTime writedAt, string writedBy)
         {
-            ChatRoomUid = chatRoomUid;
             Message = message;
             WritedAt = writedAt;
             WritedBy = writedBy;
