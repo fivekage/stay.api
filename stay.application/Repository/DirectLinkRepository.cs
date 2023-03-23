@@ -6,24 +6,24 @@ namespace stay.application.Repository
 {
     public class DirectLinkRepository : Repository<DirectLink>, IDirectLinkRepository
     {
-        private static readonly string PATH = "direct-links/";
+        public static readonly string PATH = "direct-link/";
         public DirectLinkRepository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase) : base(firebaseClient, firebaseClientDatabase)
         {
         }
 
         async Task<bool> IDirectLinkRepository.AddLink(DirectLink link)
         {
-            return (await this.AddAsync($"{PATH}{link.Me}-{link.UserUuid}", link)) != null;
+            return (await this.AddAsync($"{PATH}{link.Guid}", link)) != null;
         }
 
-        async Task<DirectLink> IDirectLinkRepository.GetLink(string me, string uuid)
+        async Task<DirectLink> IDirectLinkRepository.GetLink(string guid)
         {
-            return (await this.GetAsync($"{PATH}{me}-{uuid}")).ResultAs<DirectLink>();
+            return (await this.GetAsync($"{PATH}{guid}")).ResultAs<DirectLink>();
         }
 
-        async Task<List<KeyValuePair<string, DirectLink>>> IDirectLinkRepository.GetLinks()
+        async Task<List<KeyValuePair<string, DirectLink>>> IDirectLinkRepository.GetLinks(string me)
         {
-            return await this.GetAllAsync($"{PATH}");
+            return (await this.GetAllAsync($"{PATH}"));
         }
     }
 }

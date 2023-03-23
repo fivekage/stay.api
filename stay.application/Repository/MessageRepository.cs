@@ -1,6 +1,7 @@
 ﻿using Firebase.Database;
 using FireSharp.Interfaces;
 using stay.application.Models;
+using System;
 
 namespace stay.application.Repository
 {
@@ -14,7 +15,17 @@ namespace stay.application.Repository
 
         public async Task<bool> PostMessage(Message message)
         {
-            return (await this.AddAsync($"{ChatRoomRepository.PATH}{message.ChatRoomUid}/{PATH}{message.Uid}", message)) != null;
+            if (message.GetType() == typeof(ChannelMessage))
+            {
+                ChannelMessage msg = (ChannelMessage)message;
+                return (await this.PushAsync($"{ChatRoomRepository.PATH}{msg.ChatRoomUid}/{PATH}", msg)) != null;
+            }
+            else if (message.GetType() == typeof(PrivateMessage))
+            {
+                PrivateMessage msg = (PrivateMessage)message;
+                return (await this.PushAsync($"{DirectLinkRepository.PATH}{msg.Guid}/messages/", msg)) != null;
+            }
+            return false;
         }
 
         public async Task<List<KeyValuePair<string, Message>>> GetMessages(string chatRoomUid)

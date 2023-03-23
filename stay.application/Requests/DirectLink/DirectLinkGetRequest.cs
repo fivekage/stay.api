@@ -5,11 +5,11 @@
         /// <summary>
         /// uuid
         /// </summary>
-        public string UserUuid { get; set; }
+        public string Guid { get; set; }
 
-        public DirectLinkGetRequest(string useruuid, string me) : base(me)
+        public DirectLinkGetRequest(string guid, string me) : base(me)
         {
-            UserUuid = useruuid;
+            Guid = guid;
         }
     }
 }
