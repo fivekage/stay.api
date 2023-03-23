@@ -23,5 +23,10 @@ namespace stay.application.UseCases
         {
             return await UserRepository.GetUserByUUID(request.UserUUID);
         }
+
+        public async Task<User> HandleAsync(UserPostRequest request)
+        {
+            return await UserRepository.RegisterUser(new User(request.Uid, request.Username, request.Email, request.AvatarURL));
+        }
     }
 }

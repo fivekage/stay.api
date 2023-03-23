@@ -5,5 +5,6 @@ namespace stay.application.Repository
     public interface IUserRepository
     {
         Task<User> GetUserByUUID(string uuid);
+        Task<User> RegisterUser(User user);
     }
 }
