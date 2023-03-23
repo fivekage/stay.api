@@ -1,6 +1,7 @@
 ﻿using Firebase.Database;
 using FireSharp.Interfaces;
 using stay.application.Models;
+using System;
 
 namespace stay.application.Repository
 {
@@ -13,6 +14,11 @@ namespace stay.application.Repository
         public async Task<User> GetUserByUUID(string uuid)
         {
             return (await this.GetAsync($"user/{uuid}")).ResultAs<User>();
+        }
+
+        public async Task<User> RegisterUser(User user)
+        {
+            return (await this.AddAsync($"user/{user.Uid}", user));
         }
     }
 }

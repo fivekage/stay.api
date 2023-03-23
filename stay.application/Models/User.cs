@@ -1,10 +1,20 @@
-﻿namespace stay.application.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace stay.application.Models
 {
     public class User
     {
-        public int Uid { get; set; }
-        public string Name { get; set; }
-        public int Latitude { get; set; }
-        public int Longitude { get; set; }
+        public User(string uid, string username, string email, string avatarURL)
+        {
+            Uid = uid;
+            Username = username;
+            Email = email;
+            AvatarURL = avatarURL;
+        }
+
+        public string Uid { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string AvatarURL { get; set; }
     }
 }
