@@ -54,5 +54,14 @@ namespace stay.api.Controllers
             var result = await useCase.HandleAsync(new FriendPostRequest(request.Me, request.FriendUid));
             return Ok(result);
         }
+
+        [HttpGet("is-liked/{me}/{userUid}")]
+        public async Task<IActionResult> IsLiked([FromRoute] string me, [FromRoute] string userUid, [FromServices] IUserUseCase useCase)
+        {
+            await base.GetCurrentUserInfosAsync();
+
+            var result = await useCase.HandleAsync(new IsLikedGetRequest(userUid, me));
+            return Ok(result);
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace stay.application.UseCases
 
         public async Task<IEnumerable<Message>> HandleAsync(MessagesGetRequest request)
         {
-            return (await MessageRepository.GetMessages(request.ChatRoomUid)).Select(x => x.Value);
+            return (await MessageRepository.GetMessages(request.ChatRoomUid)).Select(x => x.Value).OrderBy(x => x.WritedAt);
         }
 
         public async Task<string> HandleAsync(PrivateMessagePostRequest request)
