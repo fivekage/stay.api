@@ -10,5 +10,7 @@ namespace stay.application.Interfaces
         Task<User> HandleAsync(UserPostRequest request);
 
         Task<bool> HandleAsync(FriendPostRequest request);
+
+        Task<bool> HandleAsync(IsLikedGetRequest request);
     }
 }

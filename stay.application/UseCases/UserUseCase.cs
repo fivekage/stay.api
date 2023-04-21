@@ -37,7 +37,18 @@ namespace stay.application.UseCases
             {
                 areWeFriends = await DirectLinkRepository.AddLink(new DirectLink(Guid.NewGuid().ToString(), new List<string>() { request.Me, request.FriendUid }));
             }
+            else
+            {
+                // Remove like
+                areWeFriends = false;
+                await UserRepository.RemoveFriend(request.Me, request.FriendUid);
+            }
             return areWeFriends;
+        }
+
+        public async Task<bool> HandleAsync(IsLikedGetRequest request)
+        {
+            return await UserRepository.DoesThisUserLikeMe(request.UserUid, request.Me);
         }
     }
 }

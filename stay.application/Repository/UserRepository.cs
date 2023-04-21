@@ -19,6 +19,15 @@ namespace stay.application.Repository
                 return false;
         }
 
+        public async Task<bool> RemoveFriend(string me, string friendUid)
+        {
+            string? userToRemove = (await this.GetAllAsync($"user/{me}/likes/")).Where(x => x.Value.Uid == friendUid).Select(x => x.Key).FirstOrDefault();
+            if (!string.IsNullOrEmpty(userToRemove))
+                return (await this.DeleteAsync($"user/{me}/likes/{userToRemove}")) != null;
+            else
+                return false;
+        }
+
         public async Task<bool> DoesThisUserLikeMe(string me, string friendUid)
         {
             return (await this.GetAllAsync($"user/{friendUid}/likes/")).Select(x => x.Value.Uid).Any(y => y == me);

@@ -16,6 +16,12 @@ namespace stay.application.Repository
             return (await this.AddAsync($"{PATH}{link.Guid}", link)) != null;
         }
 
+        Task<bool> IDirectLinkRepository.RemoveLink(string me, string userToRemove)
+        {
+            throw new NotImplementedException("Its normal for moment, this method is not needed");
+        }
+
+
         async Task<DirectLink> IDirectLinkRepository.GetLink(string guid)
         {
             return (await this.GetAsync($"{PATH}{guid}")).ResultAs<DirectLink>();
