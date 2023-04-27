@@ -4,8 +4,12 @@ namespace stay.application.Repository
 {
     public interface IMessageRepository
     {
-        Task<bool> PostMessage(Message message);
+        Task<bool> PostMessageAsync(Message message);
 
-        Task<List<KeyValuePair<string, Message>>> GetMessages(string chatRoomUid);
+        Task<string> PostFileAsync(FileCustom file);
+
+        Task<string> GetFileAsync(string filename);
+
+        Task<List<KeyValuePair<string, Message>>> GetMessagesAsync(string chatRoomUid);
     }
 }

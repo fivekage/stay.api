@@ -17,22 +17,30 @@ namespace stay.application.UseCases
 
         public async Task<string> HandleAsync(ChannelMessagePostRequest request)
         {
-            if (await MessageRepository.PostMessage(new ChannelMessage(request.ChatRoomUid, request.Message, request.WritedAt, request.WritedBy)))
+            if (await MessageRepository.PostMessageAsync(new ChannelMessage(request.ChatRoomUid, request.Message, request.WritedAt, request.WritedBy, request.ContentType)))
                 return request.ChatRoomUid;
             return string.Empty;
         }
 
         public async Task<IEnumerable<Message>> HandleAsync(MessagesGetRequest request)
         {
-            return (await MessageRepository.GetMessages(request.ChatRoomUid)).Select(x => x.Value).OrderBy(x => x.WritedAt);
+            return (await MessageRepository.GetMessagesAsync(request.ChatRoomUid)).Select(x => x.Value).OrderBy(x => x.WritedAt);
         }
 
         public async Task<string> HandleAsync(PrivateMessagePostRequest request)
         {
             Guid uid = Guid.NewGuid();
-            if (await MessageRepository.PostMessage(new PrivateMessage(request.Guid, request.Message, request.WritedAt, request.WritedBy)))
+            if (await MessageRepository.PostMessageAsync(new PrivateMessage(request.Guid, request.Message, request.WritedAt, request.WritedBy, request.ContentType)))
                 return uid.ToString();
             return string.Empty;
+        }
+
+        public async Task<string> HandleAsync(FileMessagePostRequest request)
+        {
+            string url = await MessageRepository.PostFileAsync(request.FileCustom);
+            if (!string.IsNullOrEmpty(url))
+                return url;
+            return "error";
         }
     }
 }

@@ -13,5 +13,9 @@ namespace stay.application.Repository
         Task<FirebaseResponse> UpdateAsync(string path, T entity);
 
         Task<FirebaseResponse> DeleteAsync(string path);
+
+        Task<string> StoreFile(string name, Stream file);
+
+        Task<string> GetFile(string filename);
     }
 }

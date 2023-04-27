@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Firebase.Database;
+using Firebase.Storage;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using stay.application.Repository;
@@ -7,13 +8,15 @@ using stay.application.Repository;
 public class Repository<T> : IRepository<T> where T : class
 {
     protected readonly IFirebaseClient _firebaseClient;
-    protected readonly FirebaseClient _firebaseClientDatabase;
+    protected readonly FirebaseClient _firebaseClientDatabase; 
+    protected readonly FirebaseStorage _firebaseClientStorage;
 
 
-    public Repository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase)
+    public Repository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase, FirebaseStorage firebaseStorage)
     {
         _firebaseClient = firebaseClient;
         _firebaseClientDatabase = firebaseClientDatabase;
+        _firebaseClientStorage = firebaseStorage;
     }
 
     public async Task<T> AddAsync(string path, T entity)
@@ -60,5 +63,18 @@ public class Repository<T> : IRepository<T> where T : class
         var temp = await _firebaseClientDatabase.Child(path).OnceAsync<T>();
 
         return temp.Select(x => new KeyValuePair<string, T>(x.Key, x.Object)).ToList();
+    }
+
+    public async Task<string> StoreFile(string name, Stream file)
+    {
+        return await _firebaseClientStorage
+          .Child(name)
+          .PutAsync(file);
+    }
+
+    public async Task<string> GetFile(string filename)
+    {
+        return await _firebaseClientStorage
+          .Child(filename).GetDownloadUrlAsync();
     }
 }

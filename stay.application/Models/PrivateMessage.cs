@@ -2,7 +2,7 @@
 {
     public class PrivateMessage : Message
     {
-        public PrivateMessage(string guid, string message, DateTime writedAt, string writedBy) : base(message, writedAt, writedBy)
+        public PrivateMessage(string guid, string message, DateTime writedAt, string writedBy, string contentType) : base(message, writedAt, writedBy, contentType)
         {
             Guid = guid;
         }

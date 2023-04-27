@@ -8,6 +8,11 @@
         public string Content { get; set; }
 
         /// <summary>
+        /// Message content type
+        /// </summary>
+        public string ContentType { get; set; } = "text";
+
+        /// <summary>
         /// Message date creation
         /// </summary>
         public DateTime WritedAt { get; set; }
@@ -17,11 +22,12 @@
         /// </summary>
         public string WritedBy { get; set; }
 
-        public Message( string message, DateTime writedAt, string writedBy)
+        public Message( string message, DateTime writedAt, string writedBy, string contentType)
         {
             Content = message;
             WritedAt = writedAt;
             WritedBy = writedBy;
+            ContentType = contentType;
         }
     }
 }
