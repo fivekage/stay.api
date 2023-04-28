@@ -7,6 +7,7 @@ namespace stay.application.Interfaces
     {
         Task<string> HandleAsync(ChannelMessagePostRequest request/*EmptyResponse response*/);
         Task<string> HandleAsync(PrivateMessagePostRequest request);
+        Task<string> HandleAsync(FileMessagePostRequest request);
 
         Task<IEnumerable<Message>> HandleAsync(MessagesGetRequest request);
     }

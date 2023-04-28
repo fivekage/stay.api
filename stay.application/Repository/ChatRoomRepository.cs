@@ -1,4 +1,5 @@
 ﻿using Firebase.Database;
+using Firebase.Storage;
 using FireSharp.Interfaces;
 using stay.application.Models;
 
@@ -7,7 +8,7 @@ namespace stay.application.Repository
     public class ChatRoomRepository : Repository<ChatRoom>, IChatRoomRepository
     {
         public static readonly string PATH = "room/";
-        public ChatRoomRepository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase) : base(firebaseClient, firebaseClientDatabase)
+        public ChatRoomRepository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase, FirebaseStorage firebaseStorage) : base(firebaseClient, firebaseClientDatabase, firebaseStorage)
         {
         }
 

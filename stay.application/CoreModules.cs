@@ -7,6 +7,7 @@ using stay.application.Interfaces;
 using stay.application.Repository;
 using stay.application.UseCases;
 using Firebase.Database;
+using Firebase.Storage;
 
 namespace stay.application
 {
@@ -23,6 +24,9 @@ namespace stay.application
                     AuthSecret = configuration["Firebase_AuthSecret"],
                     BasePath = Firebase_BasePath,
                 })
+            );
+            services.AddSingleton<FirebaseStorage>(
+                new FirebaseStorage(configuration["Firebase_Storage"])
             );
 
             _ = services.AddSingleton<Firebase.Database.FirebaseClient>(

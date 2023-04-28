@@ -14,6 +14,12 @@ namespace stay.api.Models
         public string Message { get; set; } = string.Empty;
 
         /// <summary>
+        /// Message content
+        /// </summary>
+        [Required]
+        public string ContentType { get; set; } = string.Empty;
+
+        /// <summary>
         /// Message date creation
         /// </summary>
         [Required]

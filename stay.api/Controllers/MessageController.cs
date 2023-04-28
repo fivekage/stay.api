@@ -49,7 +49,29 @@ namespace stay.api.Controllers
 
             try
             {
-                var result = await UseCase.HandleAsync(new ChannelMessagePostRequest(body.ChatRoomUid, body.Message, body.WritedAt, body.WritedBy));
+                var result = await UseCase.HandleAsync(new ChannelMessagePostRequest(body.ChatRoomUid, body.Message, body.WritedAt, body.WritedBy, body.ContentType));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Store a file
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        [HttpPost("chatroom/file")]
+        public async Task<IActionResult> AddFile(
+            [FromForm] FileMessageBodyRequest body)
+        {
+            await base.GetCurrentUserInfosAsync();
+
+            try
+            {
+                var result = await UseCase.HandleAsync(new FileMessagePostRequest(body.File.OpenReadStream()));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -71,7 +93,7 @@ namespace stay.api.Controllers
 
             try
             {
-                var result = await UseCase.HandleAsync(new PrivateMessagePostRequest(body.Guid, body.Message, body.WritedAt, body.WritedBy));
+                var result = await UseCase.HandleAsync(new PrivateMessagePostRequest(body.Guid, body.Message, body.WritedAt, body.WritedBy, body.ContentType));
                 return Ok(result);
             }
             catch (Exception ex)

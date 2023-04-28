@@ -1,7 +1,7 @@
 ﻿using Firebase.Database;
+using Firebase.Storage;
 using FireSharp.Interfaces;
 using stay.application.Models;
-using System;
 
 namespace stay.application.Repository
 {
@@ -9,11 +9,11 @@ namespace stay.application.Repository
     {
         private static readonly string PATH = "messages/";
 
-        public MessageRepository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase) : base(firebaseClient, firebaseClientDatabase)
+        public MessageRepository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase, FirebaseStorage firebaseStorage) : base(firebaseClient, firebaseClientDatabase, firebaseStorage)
         {
         }
 
-        public async Task<bool> PostMessage(Message message)
+        public async Task<bool> PostMessageAsync(Message message)
         {
             if (message.GetType() == typeof(ChannelMessage))
             {
@@ -28,9 +28,18 @@ namespace stay.application.Repository
             return false;
         }
 
-        public async Task<List<KeyValuePair<string, Message>>> GetMessages(string chatRoomUid)
+        public async Task<List<KeyValuePair<string, Message>>> GetMessagesAsync(string chatRoomUid)
         {
             return await this.GetAllAsync($"{ChatRoomRepository.PATH}{chatRoomUid}/{PATH}");
+        }
+        public async Task<string> PostFileAsync(FileCustom file)
+        {
+            return await this.StoreFile(file.Name, file.Content);
+        }
+
+        public async Task<string> GetFileAsync(string filename)
+        {
+            return await this.GetFile(filename);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Firebase.Database;
+using Firebase.Storage;
 using FireSharp.Interfaces;
 using stay.application.Models;
 using System;
@@ -7,7 +8,7 @@ namespace stay.application.Repository
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase) : base(firebaseClient, firebaseClientDatabase)
+        public UserRepository(IFirebaseClient firebaseClient, FirebaseClient firebaseClientDatabase, FirebaseStorage firebaseStorage) : base(firebaseClient, firebaseClientDatabase, firebaseStorage)
         {
         }
 

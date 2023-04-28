@@ -2,7 +2,7 @@
 {
     public class ChannelMessagePostRequest : MessagePostRequest
     {
-        public ChannelMessagePostRequest(string chatroomuid, string message, DateTime writedAt, string writedBy) : base(message, writedAt, writedBy)
+        public ChannelMessagePostRequest(string chatroomuid, string message, DateTime writedAt, string writedBy, string contentType) : base(message, writedAt, writedBy, contentType)
         {
             ChatRoomUid = chatroomuid;
         }
