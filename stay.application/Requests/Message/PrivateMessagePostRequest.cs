@@ -4,7 +4,7 @@ namespace stay.application.Requests.Message
 {
     public class PrivateMessagePostRequest : MessagePostRequest
     {
-        public PrivateMessagePostRequest(string roomGuid, string message, DateTime writedAt, string writedBy) : base(message, writedAt, writedBy)
+        public PrivateMessagePostRequest(string roomGuid, string message, DateTime writedAt, string writedBy, string contentType) : base(message, writedAt, writedBy, contentType)
         {
             Guid = roomGuid;
         }

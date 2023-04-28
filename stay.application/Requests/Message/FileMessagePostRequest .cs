@@ -4,9 +4,9 @@ namespace stay.application.Requests.Message
 {
     public class FileMessagePostRequest
     {
-        public FileMessagePostRequest(string name, Stream content)
+        public FileMessagePostRequest(Stream content)
         {
-            FileCustom = new FileCustom(name, content);
+            FileCustom = new FileCustom(Guid.NewGuid().ToString(), content);
         }
 
         /// <summary>

@@ -22,7 +22,7 @@
         /// </summary>
         public string WritedBy { get; set; }
 
-        public Message( string message, DateTime writedAt, string writedBy, string contentType)
+        public Message(string message, DateTime writedAt, string writedBy, string contentType)
         {
             Content = message;
             WritedAt = writedAt;
