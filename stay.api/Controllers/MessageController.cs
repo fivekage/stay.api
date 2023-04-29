@@ -63,7 +63,7 @@ namespace stay.api.Controllers
         /// </summary>
         /// <param name="body"></param>
         /// <returns></returns>
-        [HttpPost("chatroom/file")]
+        [HttpPost("file")]
         public async Task<IActionResult> AddFile(
             [FromForm] FileMessageBodyRequest body)
         {
