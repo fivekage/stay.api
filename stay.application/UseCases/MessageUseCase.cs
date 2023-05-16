@@ -9,6 +9,7 @@ namespace stay.application.UseCases
     public class MessageUseCase : AUseCase, IMessageUseCase
     {
         public IMessageRepository MessageRepository { get; }
+        public const int MAX_WIDTH = 400;
 
         public MessageUseCase(IConfiguration configuration, IMessageRepository messageRepository) : base(configuration)
         {
