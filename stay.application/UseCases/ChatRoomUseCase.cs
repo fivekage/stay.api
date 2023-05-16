@@ -63,7 +63,7 @@ namespace stay.application.UseCases
             foreach (var room in await ChatRoomRepository.GetChatRooms())
             {
                 var roomsCoord = new Coordinate(room.Value.Latitude, room.Value.Longitude);
-                if (GeoCalculator.GetDistance(userCoord, roomsCoord,1) < room.Value.Radius)
+                if (GeoCalculator.GetDistance(userCoord, roomsCoord,1, DistanceUnit.Meters) < room.Value.Radius)
                     chatRooms.Add(room.Value);
             }
             return chatRooms;
