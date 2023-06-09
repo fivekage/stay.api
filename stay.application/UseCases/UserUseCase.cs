@@ -33,16 +33,33 @@ namespace stay.application.UseCases
         public async Task<bool> HandleAsync(FriendPostRequest request)
         {
             bool areWeFriends = false;
-            if (await UserRepository.AddFriend(request.Me, request.FriendUid) && await UserRepository.DoesThisUserLikeMe(request.Me, request.FriendUid))
+            // did i already liked this person ?
+            if(await UserRepository.DoesThisUserLikeMe(request.FriendUid, request.Me))
             {
-                areWeFriends = await DirectLinkRepository.AddLink(new DirectLink(Guid.NewGuid().ToString(), new List<string>() { request.Me, request.FriendUid }));
+                await UserRepository.RemoveFriend(request.Me, request.FriendUid);
+                if(
+                    (await DirectLinkRepository.GetLinks(request.Me))
+                    .Select(x => x.Value)
+                    .Where(x => x.Members.Contains(request.Me))
+                    .Any(y => y.Members.Contains(request.FriendUid)))
+                {
+                    await DirectLinkRepository.RemoveLink(request.Me, request.FriendUid);
+                }
             }
             else
             {
-                // Remove like
-                areWeFriends = false;
-                await UserRepository.RemoveFriend(request.Me, request.FriendUid);
+                if (await UserRepository.AddFriend(request.Me, request.FriendUid) && await UserRepository.DoesThisUserLikeMe(request.Me, request.FriendUid))
+                {
+                    areWeFriends = await DirectLinkRepository.AddLink(new DirectLink(Guid.NewGuid().ToString(), new List<string>() { request.Me, request.FriendUid }));
+                }
+                else
+                {
+                    // Remove like
+                    areWeFriends = false;
+
+                }
             }
+           
             return areWeFriends;
         }
 
