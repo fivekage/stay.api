@@ -25,5 +25,7 @@ namespace stay.api.Models
 
         [Required]
         public string Color { get; set; }
+
+        public Guid Guid { get; set; }
     }
 }

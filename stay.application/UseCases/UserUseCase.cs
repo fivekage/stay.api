@@ -34,7 +34,7 @@ namespace stay.application.UseCases
         {
             bool areWeFriends = false;
             // did i already liked this person ?
-            if(await UserRepository.DoesThisUserLikeMe(request.FriendUid, request.Me))
+            if (await UserRepository.DoesThisUserLikeMe(request.FriendUid, request.Me))
             {
                 await UserRepository.RemoveFriend(request.Me, request.FriendUid);
                 if(

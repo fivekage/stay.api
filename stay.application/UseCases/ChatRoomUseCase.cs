@@ -34,7 +34,7 @@ namespace stay.application.UseCases
 
         async Task<string> IChatRoomUseCase.HandleAsync(ChatRoomPostRequest request/*, EmptyResponse response*/)
         {
-            Guid uid = Guid.NewGuid();
+            Guid uid = request.Guid ?? Guid.NewGuid();
             if (await ChatRoomRepository.AddChatRoom(
                 new ChatRoom(
                     uid.ToString(),

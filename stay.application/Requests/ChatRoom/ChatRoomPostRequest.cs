@@ -12,8 +12,9 @@ namespace stay.application.Requests.ChatRoom
         public double Latitude { get; set; }
         public string CircleColor { get; set; }
         public bool Active { get; set; }
+        public Guid? Guid { get; set; }
 
-        public ChatRoomPostRequest( string name, string description, string createdBy, bool active, double longitude, double latitude, double radius, string color)
+        public ChatRoomPostRequest(string name, string description, string createdBy, bool active, double longitude, double latitude, double radius, string color, Guid? guid = null)
         {
             Name = name;
             Description = description;
@@ -23,6 +24,7 @@ namespace stay.application.Requests.ChatRoom
             Latitude = latitude;
             Radius = radius;
             CircleColor = color;
+            Guid = guid;
         }
     }
 }
