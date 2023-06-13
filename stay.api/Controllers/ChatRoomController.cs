@@ -86,7 +86,8 @@ namespace stay.api.Controllers
                     body.Longitude,
                     body.Latitude, 
                     body.Radius,
-                    body.Color));
+                    body.Color,
+                    body.Guid));
                 return Ok(result);
             }
             catch (Exception ex)
